@@ -27,6 +27,7 @@ def create_staff(request, *args, **kwargs):
                     new_pass = password(10)
                     new_staff = User.objects.create(username=username, password=new_pass)
                     new_staff.save()
+                    new_profile = Profile.objects.create(user=new_staff, role="Employee", store=request.user.profile.store)
                     print(username, new_pass)
                     context = {
                         'store' : request.user.profile.store
