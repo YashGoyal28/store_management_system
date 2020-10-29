@@ -1,4 +1,4 @@
-$(document).on('submit', '#create_staff',function(e){
+$(document).on('submit', '#create_staff', function(e){
     e.preventDefault();
     $.ajax({
         type: 'POST',

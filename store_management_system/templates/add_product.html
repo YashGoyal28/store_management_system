@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static%}
+
+{% block js %}
+    <script src="{% static 'js/add_product.js' %}"></script>
+{% endblock js %}
+
+{% block content %}
+    <form id="product_form" method="POST">
+        {% csrf_token %}
+        Name : <input id="p_name"><br>
+        Price : <input id="p_price"><br>
+        Desc : <input id="p_description"><br>
+        Quantity : <input id="p_quantity"><br>
+        <button>Submit</button>
+    </form>
+{% endblock content %}
