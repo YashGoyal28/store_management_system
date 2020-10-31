@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+    {% load static %}
+    <form method="POST" id="create_staff">
+        {% csrf_token %}
+        <input id="username">
+        <input id="emp_id" readonly>
+        <button> Submit </button>
+    </form>
+{% endblock content %}
+{% block js %}
+    <script src="{% static 'js/create_staff.js'%}"></script>
+{% endblock js %}
