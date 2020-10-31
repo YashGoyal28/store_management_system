@@ -1,0 +1,8 @@
+{% load static %}
+body{
+    background-image:url("/static/img/front.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+    height: 100%;
+}
