@@ -11,3 +11,5 @@ db.sqlite3
 *.pyc
 *.pyc
 store_management_system/Accounts/__pycache__/models.cpython-38.pyc
+*.iml
+store_management_system/.idea/store_management_system.iml
