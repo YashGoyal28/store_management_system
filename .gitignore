@@ -7,3 +7,7 @@ myvenv
 db.sqlite3
 /static
 .DS_Store
+*.xml
+*.pyc
+*.pyc
+store_management_system/Accounts/__pycache__/models.cpython-38.pyc
