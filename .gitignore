@@ -15,3 +15,4 @@ store_management_system/.idea/vcs.xml
 *.xml
 *.sqlite3
 store_management_system/db.sqlite3
+*.xml
