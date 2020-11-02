@@ -13,3 +13,12 @@ db.sqlite3
 store_management_system/Accounts/__pycache__/models.cpython-38.pyc
 *.iml
 store_management_system/.idea/store_management_system.iml
+store_management_system/.idea/dbnavigator.xml
+store_management_system/.idea/misc.xml
+store_management_system/.idea/vcs.xml
+*.xml
+*.sqlite3
+*.xml
+*.sqlite3
+store_management_system/db.sqlite3
+*.xml
