@@ -10,9 +10,12 @@ class Bill(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     total = models.FloatField()
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
-
+    def __str__(self):
+        return self.customer.name + " " + str(self.total)
 
 class ListOfProducts(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     bill = models.ForeignKey(Bill, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=0)
+    def __str__(self):
+        return self.product.name + " " + self.bill.customer.name + " " + str(self.bill.total)

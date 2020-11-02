@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import Http404
 from django.contrib.auth.models import User
 from Auth.models import Profile,Store
-import string, random
+import string,random
 
 def staff_info(request, *args, **kwargs):
     if request.user.profile.role == "Manager":
@@ -16,7 +16,7 @@ def staff_info(request, *args, **kwargs):
 def create_staff(request, *args, **kwargs):
     if request.user.profile.role == "Manager":
         if request.method == "POST":
-            username=request.POST.get('username')
+            username = request.POST.get('username')
             def password(length):
                 letters_and_digits = string.ascii_letters + string.digits
                 result_str = ''.join((random.choice(letters_and_digits) for i in range(length)))
@@ -32,11 +32,11 @@ def create_staff(request, *args, **kwargs):
                     context = {
                         'store' : request.user.profile.store
                     }
-                    return render(request, 'create_staff.html',context);
+                    return render(request, 'create_staff.html', context);
             print(request.POST)
         context = {
-            'store' : request.user.profile.store
+            'store': request.user.profile.store
         }
-        return render(request, 'create_staff.html',context)
+        return render(request, 'create_staff.html', context)
     else:
         raise Http404("Dne")
