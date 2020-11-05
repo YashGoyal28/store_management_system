@@ -1,8 +1,28 @@
-{% load static %}
-body{
+body, html {
+  height: 100%;
+}
+
+.bg{
     background-image:url("/static/img/front.png");
+    height: 100%;
+    color: white;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    object-fit: cover;
-    height: 100%;
+}
+
+.forms{
+    height: 60%;
+}
+
+.heading{
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    font-size: 100px;
+}
+
+.sub-heading{
+    font-family: 'Fredoka One', cursive;
+    text-align: center;
+    font-size: 50px;
 }

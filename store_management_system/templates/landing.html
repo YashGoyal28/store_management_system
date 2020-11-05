@@ -9,19 +9,74 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="{% static 'css/landing.css' %}" />
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet">
         <meta name="viewport" content="width=device-width">
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
     </head>
-    <body class="background m-0">
-        <div>
-            Store Management System
-        </div>
-        <div>
-            register
-        </div>
+    <body class="m-0">
+        <div class="bg">
+            <div class="heading">
+                Store Management System
+            </div>
+            <br><br><br>
+            <div class="d-flex forms">
+                <div class="col-6 border-right">
+                    <div class="sub-heading">
+                        Register
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <form method="post" id="register_form">
+                            {% csrf_token %}
+                            <div>Details of Manager</div>
+                            <div class="d-flex">
+                                <div class="labels">User Name</div>
+                                <input type="text" name="username" id="username_register" required>
+                            </div>
+                            <div class="d-flex">
+                                <div class="labels">Email Id</div>
+                                <input type="email" name="email" id="email_register" required>
+                            </div>
+                            <div class="d-flex">
+                                <div class="labels">Phone Number</div>
+                                <input type="tel" name="phonenumber" id="phonenumber_register" placeholder="0123456789" pattern="[0-9]{10}" required>
+                            </div>
+                            <div>Details of Store</div>
+                            <div class="d-flex">
+                                <div class="labels">Name</div>
+                                <input type="text" name="storename" id="store_register" required>
+                            </div>
+                            <div class="d-flex">
+                                <div class="labels">Address</div>
+                                <textarea name="address" id="address_register" rows="4" cols="50" required></textarea>
+                            </div>
+                            <div class="d-flex">
+                                <div class="labels">Password</div>
+                                <input type="password" name="password" id="password_register" required>
+                            </div>
+                            <div class="d-flex">
+                                <div class="labels">Password</div>
+                                <input type="password" name="cpassword" id="cpassword_register" required>
+                            </div>
+                            <div id="register_error" style="colo:red"></div>
+                            <div>
+                                <button type="submit" value="Register" id="submit_register">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="sub-heading">
+                        Login
+                    </div>
+                    <div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
     <script src="{% static 'js/landing.js'%}"></script>
 </html>
