@@ -15,6 +15,10 @@ def staff_info(request, *args, **kwargs):
 
 def create_staff(request, *args, **kwargs):
     if request.user.profile.role == "Manager":
+        context = {
+            'store' : request.user.profile.store,
+            'id' : Profile.objects.filter(store=request.user.profile.store).count()
+        }
         if request.method == "POST":
             username = request.POST.get('username')
             def password(length):
@@ -29,14 +33,8 @@ def create_staff(request, *args, **kwargs):
                     new_staff.save()
                     new_profile = Profile.objects.create(user=new_staff, role="Employee", store=request.user.profile.store)
                     print(username, new_pass)
-                    context = {
-                        'store' : request.user.profile.store
-                    }
                     return render(request, 'create_staff.html', context);
             print(request.POST)
-        context = {
-            'store': request.user.profile.store
-        }
         return render(request, 'create_staff.html', context)
     else:
         raise Http404("Dne")

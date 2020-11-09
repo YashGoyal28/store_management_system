@@ -9,3 +9,10 @@ $(document).on('submit', '#create_staff', function(e){
         }
     });
 });
+
+const get_id = e => {
+    const id = document.getElementById("get_emp_id").classList[0];
+    document.getElementById("emp_id").value = "E" + id;
+}
+
+get_id();
