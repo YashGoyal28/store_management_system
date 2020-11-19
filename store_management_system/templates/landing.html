@@ -30,39 +30,53 @@
                     <div class="d-flex justify-content-center">
                         <form method="post" id="register_form">
                             {% csrf_token %}
-                            <div>Details of Manager</div>
-                            <div class="d-flex">
-                                <div class="labels">User Name</div>
-                                <input type="text" name="username" id="username_register" required>
+                            <div class="sub-sub-heading">Details of Manager</div>
+                            <div class="form-group row">
+                                <label for="username_register" class="col-sm-2 col-form-label">User Name</label>
+                                <div  class="col-sm-10">
+                                    <input type="text" class="form-control" name="username" id="username_register" required>
+                                </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="labels">Email Id</div>
-                                <input type="email" name="email" id="email_register" required>
+                            <div class="form-group row">
+                                <label for="email_register" class="col-sm-2 col-form-label">Email Id</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" name="email" id="email_register" required>
+                                </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="labels">Phone Number</div>
-                                <input type="tel" name="phonenumber" id="phonenumber_register" placeholder="0123456789" pattern="[0-9]{10}" required>
+                            <div class="form-group row">
+                                <label for="phonenumber_register" class="col-sm-2 col-form-label">Phone Number</label>
+                                <div class="col-sm-10">
+                                    <input type="tel" class="form-control" name="phonenumber" id="phonenumber_register" placeholder="0123456789" pattern="[0-9]{10}" required>
+                                </div>
                             </div>
-                            <div>Details of Store</div>
-                            <div class="d-flex">
-                                <div class="labels">Name</div>
-                                <input type="text" name="storename" id="store_register" required>
+                            <div class="sub-sub-heading">Details of Store</div>
+                            <div class="form-group row">
+                                <label for="store_register" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="storename" id="store_register" required>
+                                </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="labels">Address</div>
-                                <textarea name="address" id="address_register" rows="4" cols="50" required></textarea>
+                            <div class="form-group row">
+                                <label for="address_register" class="col-sm-2 col-form-label">Address</label>
+                                <div class="col-sm-10">
+                                    <textarea name="address" class="form-control" id="address_register" rows="4" cols="50" required></textarea>
+                                </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="labels">Password</div>
-                                <input type="password" name="password" id="password_register" required>
+                            <div class="form-group row">
+                                <label for="password_register" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" name="password" id="password_register" required>
+                                </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="labels">Password</div>
-                                <input type="password" name="cpassword" id="cpassword_register" required>
+                            <div class="form-group row">
+                                <label for="cpassword_register" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" name="cpassword" id="cpassword_register" required>
+                                </div>
                             </div>
                             <div id="register_error" style="color:red"></div>
-                            <div>
-                                <button type="submit" value="Register" id="submit_register">Register</button>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" value="Register" class="btn btn-primary" id="submit_register">Register</button>
                             </div>
                         </form>
                     </div>
@@ -71,29 +85,39 @@
                     <div class="sub-heading">
                         Login
                     </div>
-                    <div>
+                    <div class="d-flex justify-content-center">
                         <form method="post" id="login_form">
                             {% csrf_token %}
-                            <div>Log In as</div>
-                            <div class="d-flex">
-                                <div class="labels">Manager</div>
-                                <input type="radio" name="role" value="manager">
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <legend class="col-form-label col-sm-3 pt-0">Log In as</legend>
+                                    <div class="col-sm-9">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="manager_login" name="role" value="manager" required>
+                                            <label for="manager_login" class="form-check-label">Manager</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="employee_login" name="role" value="employee" required>
+                                            <label for="employee_login" class="form-check-label">Employee</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="form-group row">
+                                <label for="username_login" class="col-sm-3 col-form-label">User Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="username" id="username_login" required>
+                                </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="labels">Employee</div>
-                                <input type="radio" name="role" value="employee">
-                            </div>
-                            <div class="d-flex">
-                                <div class="labels">User Name</div>
-                                <input type="text" name="username" id="username_login" required>
-                            </div>
-                            <div class="d-flex">
-                                <div class="labels">Password</div>
-                                <input type="password" name="password" id="password_login" required>
+                            <div class="form-group row">
+                                <label for="password_login" class="col-sm-3 col-form-label">Password</label>
+                                <div class="col-sm-9">
+                                    <input type="password" class="form-control" name="password" id="password_login" required>
+                                </div>
                             </div>
                             <div id="login_error" style="color:red"></div>
-                            <div>
-                                <button type="submit" value="Login" id="submit_login">Log In</button>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" value="Login" class="btn btn-primary" id="submit_login">Log In</button>
                             </div>
                         </form>
                     </div>
