@@ -26,3 +26,28 @@ $(document).on('submit','#register_form',function(e){
         },
     });
 });
+
+$(document).on('submit','#login_form',function(e){
+    e.preventDefault();
+    $.ajax({
+        type : 'POST',
+        url : 'login/',
+        data : {
+            username : $('#username_login').val(),
+            password : $('#password_login').val(),
+            role : $("input[name=role]:checked").val(),
+            csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val()
+        },
+        success:function(data){
+            console.log(data.result);
+            if(data.result == 'success'){
+                window.location.href = 'home/';
+            }else{
+                $('#login_error').html("User Name or Password is incorrect");
+            }
+        },
+        error:function(){
+
+        },
+    });
+});

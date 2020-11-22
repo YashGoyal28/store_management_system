@@ -17,6 +17,7 @@ class Store(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     role = models.CharField(max_length=100, choices=role_choices, default='Employee')
+    PhoneNumber = models.CharField(max_length=10)
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
     def __str__(self):
         return self.user.username

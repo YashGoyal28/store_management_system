@@ -11,7 +11,9 @@ def landingpage(request, *args, **kwargs):
     return render(request, 'landing.html')
 
 def home(request, *args, **kwargs):
-    return render(request, 'base.html')
+    if request.user.is_authenticated:
+        return render(request, 'base.html')
+    return redirect(reverse("landing"))
 
 def register(request, *args, **kwargs):
     if request.method == 'POST':
@@ -74,7 +76,8 @@ def register(request, *args, **kwargs):
         profile = Profile.objects.create(
             user=user,
             role="Manager",
-            store=new_store
+            store=new_store,
+            PhoneNumber=phonenumber
         )
         login(request, user)
         data = {
@@ -82,6 +85,27 @@ def register(request, *args, **kwargs):
         }
         return JsonResponse(data)
 
+
+def login_user(request, *args, **kwargs):
+        username = request.POST['username']
+        password = request.POST['password']
+        role = request.POST['role']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            if user.profile.role != role:
+                data = {
+                    'result': 'error',
+                }
+                return JsonResponse(data)
+            login(request, user)
+            data = {
+                'result': 'success',
+            }
+            return JsonResponse(data)
+        data = {
+            'result': 'error',
+        }
+        return JsonResponse(data)
 
 def logout_user(request, *args, **kwargs):
     logout(request)
