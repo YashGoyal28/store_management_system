@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.contrib.auth.models import User
 from Auth.models import Profile,Store
 import string,random
@@ -17,13 +17,37 @@ def create_bill(request, *args, **kwargs):
         for x in request.POST:
             if x[0] == 'i':
                 total = total + Product.objects.get(id=request.POST[x]).price * int(request.POST['q-' + x])
-        b = Bill(customer=Customer.objects.get(PhoneNumber=request.POST['phone_no']),
-                 store=request.user.profile.store, total=total)
-        b.save()
-        for x in request.POST:
-            if x[0] == 'i':
-                l = ListOfProducts(product=Product.objects.get(id=request.POST[x]), bill=b,
-                                   quantity=request.POST['q-' + x])
-                l.save()
-
+        try:
+            cust = Customer.objects.filter(PhoneNumber=request.POST['phonenumber']).first()
+            b = Bill(customer=cust,store=request.user.profile.store, total=total)
+            b.save()
+            for x in request.POST:
+                if x[0] == 'i':
+                    l = ListOfProducts(product=Product.objects.get(id=request.POST[x]), bill=b,
+                                       quantity=request.POST['q-' + x])
+                    l.save()
+        except:
+            cust = Customer.objects.create(PhoneNumber=request.POST['phonenumber'],name=request.POST['name'],store=request.user.profile.store)
+            cust.save()
+            b = Bill(customer=cust,store=request.user.profile.store, total=total)
+            b.save()
+            for x in request.POST:
+                if x[0] == 'i':
+                    l = ListOfProducts(product=Product.objects.get(id=request.POST[x]), bill=b,
+                                       quantity=request.POST['q-' + x])
+                    l.save()
     return render(request, 'bill.html', context)
+
+def check_cust(request, *args, **kwargs):
+    phonenumber = request.GET['phonenumber']
+    try:
+        cust = Customer.objects.filter(PhoneNumber=phonenumber).first()
+        data = {
+            'result': 'found',
+            'name': cust.name,
+        }
+    except:
+        data = {
+            'result': 'not_found'
+        }
+    return JsonResponse(data)

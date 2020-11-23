@@ -4,11 +4,14 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect, Http404
 from .models import Store, Profile, Customer
+from Accounts.models import Bill
 
 
 # Create your views here.
 
 def landingpage(request, *args, **kwargs):
+    if request.user.is_authenticated:
+        return redirect(reverse("home"))
     return render(request, 'landing.html')
 
 def home(request, *args, **kwargs):
@@ -126,24 +129,51 @@ def create_staff(request, *args, **kwargs):
     if request.user.profile.role == "Manager":
         context = {
             'store': request.user.profile.store,
-            'id': Profile.objects.filter(store=request.user.profile.store).count()
+            'id': Profile.objects.filter(store=request.user.profile.store).count(),
         }
         if request.method == "POST":
             username = request.POST.get('username')
+            email = request.POST['email']
+            phonenumber = request.POST['phonenumber']
+            salary = request.POST['salary']
             def password(length):
                 letters_and_digits = string.ascii_letters + string.digits
                 result_str = ''.join((random.choice(letters_and_digits) for i in range(length)))
                 return result_str
             if username is not None:
                 username = username.rstrip()
+                if User.objects.filter(username=username).exists() == True:
+                    data = {
+                        'result': 'error',
+                        'target': 'username',
+                        'message': 'Username already taken',
+                    }
+                    return JsonResponse(data)
                 if username != '':
                     new_pass = password(10)
-                    new_staff = User.objects.create(username=username, password=new_pass)
+                    new_staff = User.objects.create(username=username, password=new_pass, email=email)
                     new_staff.save()
-                    new_profile = Profile.objects.create(user=new_staff, role="Employee", store=request.user.profile.store)
-                    print(username, new_pass)
-                    return render(request, 'create_staff.html', context)
+                    if len(request.FILES) != 0:
+                        new_profile = Profile.objects.create(user=new_staff, role="Employee", store=request.user.profile.store, PhoneNumber=phonenumber, salary=salary, image=request.FILES['image'])
+                    else:
+                        new_profile = Profile.objects.create(user=new_staff, role="Employee", store=request.user.profile.store, PhoneNumber=phonenumber, salary=salary)
+                    data = {
+                        'result': 'success',
+                    }
+                    return JsonResponse(data)
+                else:
+                    data = {
+                        'result': 'error',
+                        'target': 'username',
+                        'message': 'Username not given',
+                    }
+                    return JsonResponse(data)
             print(request.POST)
         return render(request, 'create_staff.html', context)
     else:
         raise Http404("Dne")
+
+def customer(request, *args, **kwargs):
+    cust=[ (x, Bill.objects.filter(customer=x).count()) for x in Customer.objects.filter(store = request.user.profile.store)]
+    print(cust)
+    return render(request, 'customer_info.html', context={'cust':cust})

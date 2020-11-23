@@ -1,0 +1,35 @@
+{% extends 'base.html' %}{%load static%} {%block content%}
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Total Visit</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in cust %}
+        <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{c.0.name}}</td>
+            <td>{{c.0.PhoneNumber}}</td>
+            <td>{{c.1}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{%endblock content%}
+{%block js%}
+    <script src="{% static 'js/group_landing.js'%}">
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('#group_nav').attr('src','{% static "img/groups_active.png" %}');
+            $('#chat_nav').attr('src','{% static "img/chat.png" %}');
+            $('#home_nav').attr('src','{% static "img/home.png" %}');
+        });
+    </script>
+{%endblock js%}
