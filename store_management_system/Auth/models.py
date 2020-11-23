@@ -17,6 +17,8 @@ class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     role = models.CharField(max_length=100, choices=role_choices, default='Employee')
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="user/", default="/user/default.png")
+    salary = models.IntegerField(default = 0)
     def __str__(self):
         return self.user.username
 

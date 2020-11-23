@@ -3,9 +3,10 @@
 {% block content %}
     {% load static %}
     <div id="get_emp_id" class="{{id}}"></div>
-    <form method="POST" id="create_staff">
+    <form enctype="multipart/form-data" method="POST" id="create_staff">
         {% csrf_token %}
         <input id="username"><br>
+        <input type="file" name="img" accept="image/*"><br>
         <input id="emp_id" readonly><br>
         <button> Submit </button>
     </form>

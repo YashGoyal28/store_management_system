@@ -1,15 +1,16 @@
-$(document).on('submit', '#product_form', e => {
+$(document).on('submit', '#edit_form', function(e) {
     e.preventDefault();
     var formData = new FormData(this);
+    console.log(formData);
     $.ajax({
         type: 'POST',
-        url: window.location.href,
+        url: '.',
         data: formData,
         cache: false,
         contentType: false,
         processData: false,
         success: function(data) {
-            window.location.href = '.'
+            window.location.href = '..'
         },
     });
 });

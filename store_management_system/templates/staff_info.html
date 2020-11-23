@@ -1,4 +1,42 @@
-{% load static%}
-{% for person in staff%}
-    {{person}}
-{% endfor %}
+{% extends 'base.html' %}{%load static%} {%block content%}
+<style>
+    .card {
+        background-color: #222831;
+        float: left;
+        margin-top: auto;
+        display: flex;
+        margin: 15px 10px;
+    }
+    
+    .create_group {
+        cursor: pointer;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        background-color: cadetblue;
+        border-radius: 50%;
+        margin: 15px 15px;
+    }
+</style>
+{%for s in staff %}
+
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="/media{{s.image}}" alt="Card image cap" style="height:200px;width: auto;">
+    <div class="card-body">
+        <h5 class="card-title" style="color:white;">Name : {{s.user.username}}</h5>
+        <p class="card-text" style="color:white;">Salary : {{s.salary}}</p>
+    </div>
+</div>
+
+{% endfor %} {%endblock content%} 
+{%block js%}
+    <script src="{% static 'js/group_landing.js'%}">
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('#group_nav').attr('src','{% static "img/groups_active.png" %}');
+            $('#chat_nav').attr('src','{% static "img/chat.png" %}');
+            $('#home_nav').attr('src','{% static "img/home.png" %}');
+        });
+    </script>
+{%endblock js%}

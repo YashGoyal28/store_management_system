@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <form id="bill_form">
+        {% csrf_token %}
+        <input name="phone_no">
+        <div id="repeat">
+            <select name= "i1">
+                {% for p in products%}
+                    <option value="{{p.id}}" class="options">{{p.name}}</option>
+                {% endfor %}
+            </select>
+            <input name="q-i1">
+            <br>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <button id="add">Add</button>
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'js/bill.js'%}"></script>
+{% endblock js %}

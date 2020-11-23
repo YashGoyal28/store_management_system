@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <form id="edit_form">
+        {% csrf_token %}
+        <input name="name" value={{p.name}}><br>
+        <input name="description" value={{p.description}}><br>
+        <input name="price" value={{p.price}}><br>
+        <input name="quantity" value={{p.quantity}}><br>
+        <button type="submit">Save</button>
+    </form>
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'js/edit.js'%}"></script>
+{% endblock js %}

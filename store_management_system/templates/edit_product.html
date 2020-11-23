@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    {% for p in products %}
+        <div class="info-box">
+            <div class="image">
+                <img src="/media/{{p.image}}" align="left">
+            </div>
+            <div class="info">
+                <a href='{{p.id}}/'>edit</a><br>
+                {{p.name}} <br>
+                {{p.description}} <br>
+                {{p.price}} <br>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content %}
+
+{% block css %}
+    <link rel="stylesheet" href={% static 'css/edit_product.css' %} />
+{% endblock css %}

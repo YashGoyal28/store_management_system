@@ -1,0 +1,19 @@
+.info-box{
+    background-color: darkcyan;
+    height: 100px;
+    border-radius: 25px;
+    width: 50%;
+    margin: auto;
+    margin-top: 15px;
+}
+
+.info{
+    text-align: right;
+    margin-right: 15px;
+}
+
+img{
+    height: 100px;
+    width: 100px;
+}
+
