@@ -9,19 +9,121 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="{% static 'css/landing.css' %}" />
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet">
         <meta name="viewport" content="width=device-width">
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
     </head>
-    <body class="background m-0">
-        <div>
-            Store Management System
+    <body class="m-0">
+        <div class="bg">
+            <div class="heading">
+                Store Management System
+            </div>
+            <br><br><br>
+            <div class="d-flex forms">
+                <div class="col-6 border-right">
+                    <div class="sub-heading">
+                        Register
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <form method="post" id="register_form">
+                            {% csrf_token %}
+                            <div class="sub-sub-heading">Details of Manager</div>
+                            <div class="form-group row">
+                                <label for="username_register" class="col-sm-2 col-form-label">User Name</label>
+                                <div  class="col-sm-10">
+                                    <input type="text" class="form-control" name="username" id="username_register" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="email_register" class="col-sm-2 col-form-label">Email Id</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" name="email" id="email_register" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="phonenumber_register" class="col-sm-2 col-form-label">Phone Number</label>
+                                <div class="col-sm-10">
+                                    <input type="tel" class="form-control" name="phonenumber" id="phonenumber_register" placeholder="0123456789" pattern="[0-9]{10}" required>
+                                </div>
+                            </div>
+                            <div class="sub-sub-heading">Details of Store</div>
+                            <div class="form-group row">
+                                <label for="store_register" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="storename" id="store_register" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="address_register" class="col-sm-2 col-form-label">Address</label>
+                                <div class="col-sm-10">
+                                    <textarea name="address" class="form-control" id="address_register" rows="4" cols="50" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="password_register" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" name="password" id="password_register" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="cpassword_register" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" name="cpassword" id="cpassword_register" required>
+                                </div>
+                            </div>
+                            <div id="register_error" style="color:red;text-align: center"></div>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" value="Register" class="btn btn-primary" id="submit_register">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="sub-heading">
+                        Login
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <form method="post" id="login_form">
+                            {% csrf_token %}
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <legend class="col-form-label col-sm-3 pt-0">Log In as</legend>
+                                    <div class="col-sm-9">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="manager_login" name="role" value="Manager" required>
+                                            <label for="manager_login" class="form-check-label">Manager</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="employee_login" name="role" value="Employee" required>
+                                            <label for="employee_login" class="form-check-label">Employee</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="form-group row">
+                                <label for="username_login" class="col-sm-3 col-form-label">User Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="username" id="username_login" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="password_login" class="col-sm-3 col-form-label">Password</label>
+                                <div class="col-sm-9">
+                                    <input type="password" class="form-control" name="password" id="password_login" required>
+                                </div>
+                            </div>
+                            <div id="login_error" style="color:red;text-align: center"></div>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" value="Login" class="btn btn-primary" id="submit_login">Log In</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-            register
-        </div>
-
     </body>
     <script src="{% static 'js/landing.js'%}"></script>
 </html>

@@ -10,12 +10,14 @@ role_choices = (
 
 class Store(models.Model):
     name = models.CharField(max_length=200)
+    address = models.TextField(max_length=500)
     def __str__(self):
         return self.name
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     role = models.CharField(max_length=100, choices=role_choices, default='Employee')
+    PhoneNumber = models.CharField(max_length=10)
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="user/", default="/user/default.png")
     salary = models.IntegerField(default = 0)
