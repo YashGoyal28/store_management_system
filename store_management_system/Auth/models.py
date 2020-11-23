@@ -20,7 +20,7 @@ class Profile(models.Model):
     PhoneNumber = models.CharField(max_length=10)
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="user/", default="/user/default.png")
-    salary = models.IntegerField(default = 0)
+    salary = models.IntegerField(default=0)
     def __str__(self):
         return self.user.username
 

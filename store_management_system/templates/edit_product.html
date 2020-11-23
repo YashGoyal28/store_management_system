@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+    <div class="d-flex justify-content-center pt-3">
+        <button onclick="window.location.href = 'add/'" class="btn btn-primary">Add Product</button>
+    </div>
     {% for p in products %}
         <div class="info-box">
             <div class="image">

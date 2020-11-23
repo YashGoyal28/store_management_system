@@ -1,7 +1,8 @@
+import string,random
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, reverse
-from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect, Http404
 from .models import Store, Profile, Customer
 
 
@@ -110,3 +111,39 @@ def login_user(request, *args, **kwargs):
 def logout_user(request, *args, **kwargs):
     logout(request)
     return redirect(reverse('landing'))
+
+
+def staff_info(request, *args, **kwargs):
+    if request.user.profile.role == "Manager":
+        context = {
+            'staff' : Profile.objects.filter(store=request.user.profile.store).filter(role="Employee")
+        }
+        return render(request, 'staff_info.html',context);
+    else:
+        raise Http404("Dne")
+
+def create_staff(request, *args, **kwargs):
+    if request.user.profile.role == "Manager":
+        context = {
+            'store': request.user.profile.store,
+            'id': Profile.objects.filter(store=request.user.profile.store).count()
+        }
+        if request.method == "POST":
+            username = request.POST.get('username')
+            def password(length):
+                letters_and_digits = string.ascii_letters + string.digits
+                result_str = ''.join((random.choice(letters_and_digits) for i in range(length)))
+                return result_str
+            if username is not None:
+                username = username.rstrip()
+                if username != '':
+                    new_pass = password(10)
+                    new_staff = User.objects.create(username=username, password=new_pass)
+                    new_staff.save()
+                    new_profile = Profile.objects.create(user=new_staff, role="Employee", store=request.user.profile.store)
+                    print(username, new_pass)
+                    return render(request, 'create_staff.html', context)
+            print(request.POST)
+        return render(request, 'create_staff.html', context)
+    else:
+        raise Http404("Dne")

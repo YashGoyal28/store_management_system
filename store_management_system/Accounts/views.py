@@ -3,38 +3,27 @@ from django.http import Http404
 from django.contrib.auth.models import User
 from Auth.models import Profile,Store
 import string,random
+from .models import Bill, ListOfProducts
+from Auth.models import Customer
+from Products.models import Product
 
-def staff_info(request, *args, **kwargs):
-    if request.user.profile.role == "Manager":
-        context = {
-            'staff' : Profile.objects.filter(store=request.user.profile.store).filter(role="Employee")
-        }
-        return render(request, 'staff_info.html',context);
-    else:
-        raise Http404("Dne")
 
-def create_staff(request, *args, **kwargs):
-    if request.user.profile.role == "Manager":
-        context = {
-            'store' : request.user.profile.store,
-            'id' : Profile.objects.filter(store=request.user.profile.store).count()
-        }
-        if request.method == "POST":
-            username = request.POST.get('username')
-            def password(length):
-                letters_and_digits = string.ascii_letters + string.digits
-                result_str = ''.join((random.choice(letters_and_digits) for i in range(length)))
-                return result_str
-            if username is not None :
-                username = username.rstrip()
-                if username != '':
-                    new_pass = password(10)
-                    new_staff = User.objects.create(username=username, password=new_pass)
-                    new_staff.save()
-                    new_profile = Profile.objects.create(user=new_staff, role="Employee", store=request.user.profile.store)
-                    print(username, new_pass)
-                    return render(request, 'create_staff.html', context);
-            print(request.POST)
-        return render(request, 'create_staff.html', context)
-    else:
-        raise Http404("Dne")
+def create_bill(request, *args, **kwargs):
+    context = {
+        'products': Product.objects.filter(store=request.user.profile.store)
+    }
+    if request.method == "POST":
+        total = 0
+        for x in request.POST:
+            if x[0] == 'i':
+                total = total + Product.objects.get(id=request.POST[x]).price * int(request.POST['q-' + x])
+        b = Bill(customer=Customer.objects.get(PhoneNumber=request.POST['phone_no']),
+                 store=request.user.profile.store, total=total)
+        b.save()
+        for x in request.POST:
+            if x[0] == 'i':
+                l = ListOfProducts(product=Product.objects.get(id=request.POST[x]), bill=b,
+                                   quantity=request.POST['q-' + x])
+                l.save()
+
+    return render(request, 'bill.html', context)

@@ -2,14 +2,42 @@
 {% load static %}
 
 {% block content %}
-    <form id="edit_form">
-        {% csrf_token %}
-        <input name="name" value={{p.name}}><br>
-        <input name="description" value={{p.description}}><br>
-        <input name="price" value={{p.price}}><br>
-        <input name="quantity" value={{p.quantity}}><br>
-        <button type="submit">Save</button>
-    </form>
+    <div class="d-flex justify-content-center pt-5">
+        <form class="col-9" id="edit_form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="name" value={{p.name}} id="name" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="price" class="col-sm-2 col-form-label">Price</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="price" value={{p.price}} id="price" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="description" class="col-sm-2 col-form-label">Description</label>
+                <div class="col-sm-10">
+                    <textarea name="description" class="form-control" id="description" rows="4" cols="50" required>{{p.description}}</textarea>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="quantity" class="col-sm-2 col-form-label">Quantity</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="quantity" value={{p.quantity}} id="quantity" required>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <button type="submit" value="Register" class="btn btn-primary" id="submit_register">Save</button>
+            </div>
+        </form>
+    </div>
 {% endblock content %}
 
 {% block js %}
