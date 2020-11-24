@@ -121,7 +121,7 @@ def staff_info(request, *args, **kwargs):
     context = {
         'staff' : Profile.objects.filter(store=request.user.profile.store).filter(role="Employee")
     }
-    return render(request, 'staff_info.html',context);
+    return render(request, 'staff_info.html',context)
 
 def create_staff(request, *args, **kwargs):
     if request.user.profile.role == "Manager":
