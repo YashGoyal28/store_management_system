@@ -5,7 +5,8 @@ from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect, Http404
 from .models import Store, Profile, Customer
 from Accounts.models import Bill
-
+from django.core.mail import send_mail
+from django.conf import settings
 
 # Create your views here.
 
@@ -152,11 +153,14 @@ def create_staff(request, *args, **kwargs):
                 if username != '':
                     new_pass = password(10)
                     new_staff = User.objects.create(username=username, password=new_pass, email=email)
+                    send_mail('Staff Registration',f'Hi {username},\n Welcome to SMS.\n Your username : {username},\n Your password : {new_pass}',settings.EMAIL_HOST_USER, [email,])
                     new_staff.save()
                     if len(request.FILES) != 0:
                         new_profile = Profile.objects.create(user=new_staff, role="Employee", store=request.user.profile.store, PhoneNumber=phonenumber, salary=salary, image=request.FILES['image'])
+                        new_profile.save()
                     else:
                         new_profile = Profile.objects.create(user=new_staff, role="Employee", store=request.user.profile.store, PhoneNumber=phonenumber, salary=salary)
+                        new_profile.save()
                     data = {
                         'result': 'success',
                     }
