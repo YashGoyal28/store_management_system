@@ -153,7 +153,7 @@ def create_staff(request, *args, **kwargs):
                 if username != '':
                     new_pass = password(10)
                     new_staff = User.objects.create(username=username, password=new_pass, email=email)
-                    send_mail('Staff Registration',f'Hi {username},\n Welcome to SMS.\n Your username : {username},\n Your password : {new_pass}',settings.EMAIL_HOST_USER, [email,])
+                    send_mail('Staff Registration',f'Hi {username},\nWelcome to SMS.\nYour username : {username},\nYour password : {new_pass}',settings.EMAIL_HOST_USER, [email,])
                     new_staff.save()
                     if len(request.FILES) != 0:
                         new_profile = Profile.objects.create(user=new_staff, role="Employee", store=request.user.profile.store, PhoneNumber=phonenumber, salary=salary, image=request.FILES['image'])
