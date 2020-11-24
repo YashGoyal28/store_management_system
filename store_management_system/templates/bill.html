@@ -18,12 +18,12 @@
                     </div>
                 </div>
                 <div id="repeat">
-                    <select class="product_select" id="i1" name= "i1">
+                    <select class="product_select" style="display: none" id="i0" name= "i0">
                         {% for p in products%}
                             <option value="{{p.id}}" class="{{p.price}} options">{{p.name}}</option>
                         {% endfor %}
                     </select>
-                    <input class="product_price" type="number" value="0" name="q-i1" min="0">
+                    <input class="product_price" style="display: none" type="number" value="0" id="q-i0" name="q-i0" min="0">
                     <br>
                 </div>
                 <div class="d-flex justify-content-center p-2">
@@ -35,7 +35,15 @@
             </form>
         </div>
         <div class="col-6 d-flex justify-content-center">
-            <div class="col-12 pt-3">
+            <div id="PrintableBill" class="col-12 pt-3">
+                <div>
+                    <div class="d-flex">
+                        <b>Name :  </b><div id="Bill_name"></div>
+                    </div>
+                    <div class="d-flex">
+                        <b>Phone Number :  </b><div id="Bill_phonenumber"></div>
+                    </div>
+                </div>
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
@@ -55,9 +63,9 @@
             </div>
         </div>
     </div>
-
 {% endblock content %}
 
 {% block js %}
     <script src="{% static 'js/bill.js'%}"></script>
+    <script src="{% static 'js/Print This/printThis.js'%}"></script>
 {% endblock js %}

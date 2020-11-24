@@ -28,7 +28,7 @@
                         Register
                     </div>
                     <div class="d-flex justify-content-center">
-                        <form method="post" id="register_form">
+                        <form method="post" id="register_form" autocomplete="off">
                             {% csrf_token %}
                             <div class="sub-sub-heading">Details of Manager</div>
                             <div class="form-group row">
@@ -86,7 +86,7 @@
                         Login
                     </div>
                     <div class="d-flex justify-content-center">
-                        <form method="post" id="login_form">
+                        <form method="post" id="login_form" autocomplete="off">
                             {% csrf_token %}
                             <fieldset class="form-group">
                                 <div class="row">

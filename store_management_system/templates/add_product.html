@@ -9,7 +9,7 @@
 
 <div class="d-flex justify-content-center pt-5"><div style="font-size:30px;"><b>Add Product</b></div></div>
     <div class="d-flex justify-content-center pt-5">
-        <form class="col-9" id="product_form" enctype="multipart/form-data">
+        <form class="col-9" id="product_form" autocomplete="off" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group row">
                 <label for="name" class="col-sm-2 col-form-label">Name</label>
@@ -41,7 +41,7 @@
 
             <div class="form-group row">
                 <div class="col-sm-12">
-                    <input type="file" class="form-control" name="image" id="image" accept="image/*">
+                    <input type="file" class="form-control-file" name="image" id="image" accept="image/*">
                 </div>
             </div>
 

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    {% load static %}
+    <div class="bg">
+        <div style="font-size: 100px;font-family: 'Lobster', cursive;color: darkblue" class="text-center"><b>WELCOME TO</b></div>
+        <div style="font-size: 100px;font-family: 'Lobster', cursive;color: darkblue" class="text-center"><b>{{request.user.profile.store.name}}</b></div>
+    </div>
+{% endblock content %}
+{% block js %}
+{% endblock js %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+{% endblock css %}

@@ -17,7 +17,7 @@ def landingpage(request, *args, **kwargs):
 
 def home(request, *args, **kwargs):
     if request.user.is_authenticated:
-        return render(request, 'base.html')
+        return render(request, 'home.html')
     return redirect(reverse("landing"))
 
 def register(request, *args, **kwargs):
@@ -118,13 +118,10 @@ def logout_user(request, *args, **kwargs):
 
 
 def staff_info(request, *args, **kwargs):
-    if request.user.profile.role == "Manager":
-        context = {
-            'staff' : Profile.objects.filter(store=request.user.profile.store).filter(role="Employee")
-        }
-        return render(request, 'staff_info.html',context);
-    else:
-        raise Http404("Dne")
+    context = {
+        'staff' : Profile.objects.filter(store=request.user.profile.store).filter(role="Employee")
+    }
+    return render(request, 'staff_info.html',context);
 
 def create_staff(request, *args, **kwargs):
     if request.user.profile.role == "Manager":
@@ -179,5 +176,6 @@ def create_staff(request, *args, **kwargs):
 
 def customer(request, *args, **kwargs):
     cust=[ (x, Bill.objects.filter(customer=x).count()) for x in Customer.objects.filter(store = request.user.profile.store)]
-    print(cust)
+    cust.sort(key=lambda x: x[1])
+    cust.reverse()
     return render(request, 'customer_info.html', context={'cust':cust})

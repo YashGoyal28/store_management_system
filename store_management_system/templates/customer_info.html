@@ -6,6 +6,7 @@
             <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">Phone Number</th>
+            <th scope="col">Last Visited</th>
             <th scope="col">Total Visit</th>
         </tr>
     </thead>
@@ -15,6 +16,7 @@
             <th scope="row">{{forloop.counter}}</th>
             <td>{{c.0.name}}</td>
             <td>{{c.0.PhoneNumber}}</td>
+            <td>{{c.0.last_visited}}</td>
             <td>{{c.1}}</td>
         </tr>
         {% endfor %}

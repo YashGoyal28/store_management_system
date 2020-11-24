@@ -18,9 +18,11 @@
         margin: 15px 15px;
     }
 </style>
-<div class="d-flex justify-content-center pt-3">
-    <button onclick="window.location.href = '/create_staff/'" class="btn btn-primary">Add Staff</button>
-</div>
+{%ifequal request.user.profile.role "Manager"%}
+    <div class="d-flex justify-content-center pt-3">
+        <button onclick="window.location.href = '/create_staff/'" class="btn btn-primary">Add Staff</button>
+    </div>
+{%endifequal%}
 {%for s in staff %}
 
 <div class="card" style="width: 18rem;">

@@ -5,7 +5,7 @@
     <div id="get_emp_id" class="{{id}}"></div>
     <div class="d-flex justify-content-center pt-5"><div style="font-size:30px;"><b>Add Staff Member</b></div></div>
     <div class="d-flex justify-content-center pt-5">
-        <form enctype="multipart/form-data" method="POST" id="create_staff">
+        <form enctype="multipart/form-data" autocomplete="off" method="POST" id="create_staff">
             {% csrf_token %}
             <div class="form-group row">
                 <label for="username" class="col-sm-2 col-form-label">User Name</label>
@@ -33,7 +33,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-sm-12">
-                    <input type="file" class="form-control" name="image" id="image" accept="image/*">
+                    <input type="file" class="form-control-file" name="image" id="image" accept="image/*">
                 </div>
             </div>
             <div id="error" style="color: red"></div>

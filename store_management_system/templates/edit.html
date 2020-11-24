@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="d-flex justify-content-center pt-5">
-        <form class="col-9" id="edit_form" enctype="multipart/form-data">
+        <form class="col-9" id="edit_form" autocomplete="off" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group row">
                 <label for="name" class="col-sm-2 col-form-label">Name</label>
