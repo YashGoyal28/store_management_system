@@ -152,7 +152,7 @@ def create_staff(request, *args, **kwargs):
                     return JsonResponse(data)
                 if username != '':
                     new_pass = password(10)
-                    new_staff = User.objects.create(username=username, password=new_pass, email=email)
+                    new_staff = User.objects.create_user(username=username, password=new_pass, email=email)
                     send_mail('Staff Registration',f'Hi {username},\nWelcome to SMS.\nYour username : {username},\nYour password : {new_pass}',settings.EMAIL_HOST_USER, [email,])
                     new_staff.save()
                     if len(request.FILES) != 0:
